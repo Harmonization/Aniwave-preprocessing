@@ -3,7 +3,7 @@ export const getFiles = async () => {
     // Загрузка длин волн
     // const response_nm = await fetch('./Static/nm.json')
     
-    const response = await fetch('./Static/nm.json', {
+    const response = await fetch('Static/nm.json', {
         headers:{
             accept: 'application/json',
             'User-agent': 'learning app',
