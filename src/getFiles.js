@@ -1,5 +1,5 @@
 
-export default async function getFiles() {
+export const getFiles = async () => {
     // Загрузка длин волн
     const response_nm = await fetch('./Static/nm.json')
     const nm = await response_nm.json()

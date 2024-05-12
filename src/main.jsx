@@ -8,7 +8,7 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
-import getFiles from './getFiles.js'
+import { getFiles } from './getFiles.js'
 
 const router = createBrowserRouter([
   {
