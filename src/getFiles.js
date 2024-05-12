@@ -7,6 +7,6 @@ export const getFiles = async () => {
     // Загрузка текста описания разделов
     // const response_text = await fetch('./static/text.json')
     // const text = await response_text.json()
-
+    console.log(nm)
     return {nm}
 }
