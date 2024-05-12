@@ -6,6 +6,13 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  const fetchFunc = async () => {
+    const request = 'http://127.0.0.1:8000/'
+    const response = await fetch(request)
+    const result = await response.json()
+    console.log(result)
+  }
+
   return (
     <>
       <div>
@@ -17,6 +24,7 @@ function App() {
         </a>
       </div>
       <h1>Vite + React</h1>
+      <button onClick={fetchFunc}></button>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
