@@ -1,7 +1,7 @@
 
 export default async function getFiles() {
     // Загрузка длин волн
-    const response_nm = await fetch('./static/nm.json')
+    const response_nm = await fetch('./Static/nm.json')
     const nm = await response_nm.json()
 
     // Загрузка текста описания разделов
