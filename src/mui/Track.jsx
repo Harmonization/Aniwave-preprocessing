@@ -19,9 +19,9 @@ import Slider from '@mui/material/Slider';
 //   },
 // ];
 
-function valuetext(value) {
-  return `${value}°C`;
-}
+// function valuetext(value) {
+//   return `${value}°C`;
+// }
 
 export default function Track({changeFunc, min=-1, max=1}) {
   const stepLabel = (max - min) / 4
@@ -50,6 +50,7 @@ export default function Track({changeFunc, min=-1, max=1}) {
         min={min}
         max={max}
         marks={marks}
+        color="secondary"
       />
     </Box>
   );

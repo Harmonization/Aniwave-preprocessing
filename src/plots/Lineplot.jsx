@@ -19,6 +19,10 @@ export default function Lineplot({x, y, title='', xlabel='', ylabel='', width=35
             layout={{
               margin: {t: 30, b: 30, l: 50, r: 30},
               title: title, 
+              font: {
+                color: 'orange',
+                size: 16
+              },
               // paper_bgcolor: 'rgb(253, 216, 254)', 
               // plot_bgcolor: 'rgb(253, 216, 254)', 
               paper_bgcolor: 'rgba(119, 204, 247, .01)', 

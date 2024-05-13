@@ -10,16 +10,17 @@ export default function ColorTextFields({ changeRoi, setColor, setDescription, c
     <Box
       component="form"
       sx={{
-        '& > :not(style)': { m: 1, width: '270px' },
+        '& > :not(style)': { m: 1, width: '270px', color: 'orange' },
       }}
       noValidate
       autoComplete="off"
     >
       <TextField 
+        
         onChange={e => changeRoi(e.target.value)}
         defaultValue={'x0=100, x1=150, y0=100, y1=150'} 
         label="Координаты ROI" 
-        color="secondary" 
+        color="warning" 
         focused />
 
       <TextField
@@ -35,7 +36,7 @@ export default function ColorTextFields({ changeRoi, setColor, setDescription, c
         defaultValue='#1ae221' 
         type='color' 
         label="Цвет ROI" 
-        color="secondary" 
+        color="warning" 
         focused 
       />
 

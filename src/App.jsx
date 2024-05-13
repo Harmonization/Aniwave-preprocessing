@@ -13,17 +13,9 @@ import GitHubLabel from './mui/GitHubLabel'
 import ColorTextFields from './mui/ColorTextFields'
 import Track from './mui/Track'
 import HiddenImage from './mui/HiddenImage.jsx'
+import FormDialog from './mui/FormDialog'
 
 import { Stack } from '@mui/material';
-
-const inputStory = [
-  '(b120 - b70) / (b120 + b70)',
-  'b70',
-  'b203',
-  'b150 + sin(b140)',
-  'b100 - b40',
-  'b30 * b60'
-]
 
 const smoothMethods = {
   golay: 'Фильтр Савицкого - Голея',
@@ -54,13 +46,15 @@ const colors = [
 const colorsDict = Object.assign({}, ...Object.entries({...colors}).map(([a,b]) => ({ [b]: b })))
 
 function App() {
+  const {nm, settings, parameters, inputStory} = useLoaderData()
+
   const [name, setName] = useState(null) // Имя текущего HSI
   const [rgb, setRgb] = useState(null)
   const [channel, setChannel] = useState(null)
-  const [coordinates, setCoordinates] = useState([0, 0])
+  const [coordinates, setCoordinates] = useState([parameters.x, parameters.y])
   const [spectre, setSpectre] = useState(null)
-  const [method, setMethod] = useState('golay')
-  const [h, setH] = useState('5')
+  const [method, setMethod] = useState(parameters.filter)
+  const [h, setH] = useState(parameters.h)
   const [expr, setExpr] = useState(inputStory[0])
   const [rois, setRois] = useState([])
 
@@ -69,13 +63,11 @@ function App() {
   const [description, setDescription] = useState('')
 
   // Настройки
-  const {nm, settings} = useLoaderData()
-
   const [roisStory, setRoisStory] = useState(settings)
   const [message, setMessage] = useState('')
   const [extremum, setExtremum] = useState([-1, 1]) // [min, max] из channel (для Heatmap)
   const [thr, setThr] = useState([extremum[0], extremum[1]])
-  const [colorHM, setColorHM] = useState('Rainbow') // Цвет Heatmap
+  const [colorHM, setColorHM] = useState(parameters.color_HM) // Цвет Heatmap
   
   const fetchFunc = async e => {
     const files = e.target.files
@@ -97,9 +89,12 @@ function App() {
       t1: t1,
       t2: t2
     }));
-    const { spectral_index, max, min } = await response.json();
+    const { spectral_index, max, min, new_story, result } = await response.json();
     setChannel(spectral_index);
     setExtremum([min, max])
+    setThr([min, max])
+    console.log(new_story)
+    console.log(result)
   };
 
   const pressChannel = async ({ key, target: { value } }) => {
@@ -161,7 +156,7 @@ function App() {
   useEffect(() => {
     if (name) {
       getChannel(expr)
-      getRgb()
+      // getRgb()
     }
   }, [name])
 
@@ -181,15 +176,40 @@ function App() {
     const [t1, t2] = thr
     return arr.map(row => row.map(item => t1 <= item && item <= t2 ? item : null))
   }
-  
-  // const changeThr = values => {
-  //   setThr(values)
-  //   getChannel(expr)
-  // }
+
+  const upload = async (filename) => {
+    const save_filter = document.querySelectorAll('#demo-simple-select-autowidth')[1].innerHTML
+    const [slider1, slider2] = document.querySelectorAll("input[aria-labelledby='track-inverted-range-slider']")
+    const selectors = document.querySelectorAll(".rois-panel > .MuiBox-root> .MuiBox-root")
+
+    const request = `http://localhost:8000/upload?`
+    const response = await fetch(request, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({
+        method: Object.keys(smoothMethods).filter(item => smoothMethods[item]==save_filter)[0],
+        h: document.querySelector("input[step='1']").value,
+        expr: document.querySelector('#free-solo-2-demo').value,
+        t1: slider1.value,
+        t2: slider2.value,
+        rois: Array.from(selectors).map(selector => str2Numbers(selector.innerHTML)), // Двумерный массив
+        filename: filename
+      })
+    })
+    
+    const result = await response.json()
+    console.log(result)
+  }
 
   return (
     <>
+    <div className="page">
+      
       <InputFileUpload clickFunc={fetchFunc}/>
+
+      <FormDialog submitFunc={upload}/>
 
       <div className="workflow">
 
@@ -245,11 +265,11 @@ function App() {
 
         {name && <GitHubLabel labels={roisStory} pendingValue={rois} setPendingValue={setRois}/>}
 
-
         </div>
 
-
       </div>
+
+    </div>
     </>
   )
 }
