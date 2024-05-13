@@ -208,8 +208,14 @@ export const getFiles = async () => {
         1004
     ]
     
+    // Загрузка настроек
+    const request = `http://localhost:8000/settings`
+    const response = await fetch(request)
+    const settings = await response.json()
+    console.log(settings)
+    
     // Загрузка текста описания разделов
     // const response_text = await fetch('./static/text.json')
     // const text = await response_text.json()
-    return {nm}
+    return {nm, settings}
 }

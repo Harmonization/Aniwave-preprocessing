@@ -1,7 +1,7 @@
 
 import Plot from 'react-plotly.js'
 
-export default function Heatmap({z, clickFunc, width=700, height=500, color='Earth'}) {
+export default function Heatmap({z, clickFunc, width=700, height=500, color='Earth', shapes=[]}) {
     return (
       <div className="heatmap-item">
         <Plot 
@@ -14,6 +14,15 @@ export default function Heatmap({z, clickFunc, width=700, height=500, color='Ear
           ]} 
           onClick={async e => clickFunc(e)}
           layout={{
+            xaxis: {
+              ticks: '',
+              showticklabels: false
+            },
+            yaxis: {
+              ticks: '',
+              showticklabels: false
+            },
+            shapes: shapes,
             width: width, 
             height: height,
             margin: {t: 0, b: 30, l: 0, r: 0},
