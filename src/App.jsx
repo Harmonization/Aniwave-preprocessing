@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLoaderData } from "react-router-dom";
+import * as XLSX from "xlsx"
 
 import Heatmap from './plots/Heatmap'
 import Lineplot from './plots/Lineplot'
@@ -16,6 +17,7 @@ import HiddenImage from './mui/HiddenImage.jsx'
 import FormDialog from './mui/FormDialog'
 
 import { Stack } from '@mui/material';
+import Button from '@mui/material/Button';
 
 const smoothMethods = {
   golay: 'Фильтр Савицкого - Голея',
@@ -89,11 +91,10 @@ function App() {
       t1: t1,
       t2: t2
     }));
-    const { spectral_index, max, min, new_story, result } = await response.json();
+    const { spectral_index, max, min, result } = await response.json();
     setChannel(spectral_index);
     setExtremum([min, max])
     setThr([min, max])
-    console.log(new_story)
     console.log(result)
   };
 
@@ -174,7 +175,7 @@ function App() {
   const thresholding = (arr, thr) => {
     // Маскирование двумерного массива
     const [t1, t2] = thr
-    return arr.map(row => row.map(item => t1 <= item && item <= t2 ? item : null))
+    return arr.map(row => row.map(item => (t1 <= item && item <= t2) || item == 0 ? item : null))
   }
 
   const upload = async (filename) => {
@@ -203,13 +204,25 @@ function App() {
     console.log(result)
   }
 
+  const saveSpectre2Xlsx = () => {
+
+    const dataaa = spectre.map((val, indx) => ({band: indx, nm: nm[indx], value: val}))
+
+    const wb = XLSX.utils.book_new()
+    const ws = XLSX.utils.json_to_sheet(dataaa)
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1')
+    XLSX.writeFile(wb, 'table.xlsx')
+  }
+
   return (
     <>
     <div className="page">
       
       <InputFileUpload clickFunc={fetchFunc}/>
 
-      <FormDialog submitFunc={upload}/>
+      {name && <FormDialog submitFunc={upload}/>}
+
+      {spectre && <Button onClick={saveSpectre2Xlsx} variant="contained">Таблица спектра</Button>}
 
       <div className="workflow">
 
@@ -218,7 +231,7 @@ function App() {
 
           <Stack direction={'row'} spacing={5}>
 
-            {name && <SmartInput pressChannel={pressChannel} story={inputStory} defaultValue={inputStory[0]}/>}
+            {name && <SmartInput pressChannel={pressChannel} dopFunc={getChannel} story={inputStory} defaultValue={inputStory[0]}/>}
             {rgb && <HiddenImage component={<Rgb rgb={rgb} />} title='Цветное изображение'/>}
 
           </Stack>

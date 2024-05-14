@@ -21,7 +21,7 @@ export default function FormDialog({submitFunc}) {
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Сохранить
+        Скормить результат диску
       </Button>
       <Dialog
         open={open}
@@ -41,7 +41,7 @@ export default function FormDialog({submitFunc}) {
         <DialogTitle>Сохранить результат на диск</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Введите имя для сохранения на диск. Если такой файл уже существует, он будет перезаписан. Сохраняется группа файлов (ROI), которые были предобработаны. Их имя указывается следующим образом: "[УказанноеИмя]_[i]", где i - это номер ROI.
+            Введите имя для сохранения на диск. Если такой файл уже существует, операция будет приостановлена. Сохраняется группа файлов (ROI), которые были предобработаны. Их имя указывается следующим образом: "[УказанноеИмя]_[i]", где i - это номер ROI.
           </DialogContentText>
           <TextField
             autoFocus
