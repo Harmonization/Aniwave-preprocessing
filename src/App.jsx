@@ -180,7 +180,7 @@ function App() {
 
   const upload = async (filename) => {
     const save_filter = document.querySelectorAll('#demo-simple-select-autowidth')[1].innerHTML
-    const [slider1, slider2] = document.querySelectorAll("input[aria-labelledby='track-inverted-range-slider']")
+    const [text1, slider1, slider2, text2] = document.querySelectorAll("input[aria-labelledby='track-inverted-range-slider']")
     const selectors = document.querySelectorAll(".rois-panel > .MuiBox-root> .MuiBox-root")
 
     const request = `http://localhost:8000/upload?`
