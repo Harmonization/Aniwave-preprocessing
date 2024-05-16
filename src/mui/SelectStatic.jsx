@@ -4,13 +4,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function SelectStatic({menuItems, currentValue, changeFunc, title='Статистика', nullElem=false}) {
-  const [value, setValue] = React.useState('')
+export default function SelectStatic({menuItems, value, handleChange, title='Статистика', nullElem=false}) {
+  // const [value, setValue] = React.useState('')
 
-  const handleChange = e => {
-    if (!currentValue) setValue(e.target.value)
-    if (changeFunc) changeFunc(e.target.value)
-  }
+  // const handleChange = e => {
+  //   if (!currentValue) setValue(e.target.value)
+  //   if (changeFunc) changeFunc(e.target.value)
+  // }
 
   return (
     <div>
@@ -19,7 +19,7 @@ export default function SelectStatic({menuItems, currentValue, changeFunc, title
         <Select
           labelId="demo-simple-select-autowidth-label"
           id="demo-simple-select-autowidth"
-          value={currentValue ? currentValue : value}
+          value={value}
           onChange={handleChange}
           autoWidth
           label={`${title}`}

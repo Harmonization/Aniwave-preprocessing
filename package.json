@@ -17,6 +17,7 @@
     "@fontsource/roboto": "^5.0.13",
     "@mui/icons-material": "^5.15.17",
     "@mui/material": "^5.15.17",
+    "@mui/x-charts": "^7.4.0",
     "gh-pages": "^6.1.1",
     "plotly": "^1.0.6",
     "pythonia": "^1.2.0",

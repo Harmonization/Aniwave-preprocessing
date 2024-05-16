@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 
 import SimpleSnackbar from './SimpleSnackbar'
 
-export default function ColorTextFields({ changeRoi, setColor, setDescription, clickFunc, message }) {
+export default function ColorTextFields({ clickFunc, message }) {
   return (
     <Box
       component="form"
@@ -15,16 +15,14 @@ export default function ColorTextFields({ changeRoi, setColor, setDescription, c
       noValidate
       autoComplete="off"
     >
-      <TextField 
-        
-        onChange={e => changeRoi(e.target.value)}
+      <TextField
         defaultValue={'x0=100, x1=150, y0=100, y1=150'} 
         label="Координаты ROI" 
         color="warning" 
         focused />
 
       <TextField
-        onChange={e => setDescription(e.target.value)}
+        // onChange={e => setDescription(e.target.value)}
         label="Описание"
         variant="standard"
         color="warning"
@@ -32,7 +30,7 @@ export default function ColorTextFields({ changeRoi, setColor, setDescription, c
       />
 
       <TextField 
-        onChange={e => setColor(e.target.value)} 
+        // onChange={e => setColor(e.target.value)} 
         defaultValue='#1ae221' 
         type='color' 
         label="Цвет ROI" 

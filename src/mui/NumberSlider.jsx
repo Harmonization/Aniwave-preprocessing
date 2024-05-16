@@ -5,15 +5,16 @@ import { Typography } from '@mui/material';
 
 export default function SliderSizes({min, changeFunc}) {
   return (
-    <Box sx={{ width: 300 }}>
-      <Typography id="input-slider" gutterBottom><strong>Длина окна фильтрации</strong></Typography>
+    <Box sx={{ width: 400 }}>
+      <Typography textAlign='center' id="input-slider" gutterBottom><strong>Длина окна фильтрации</strong></Typography>
       <Slider 
         color="secondary"
-        min={min} 
-        onChange={e => changeFunc(e.target.value)} 
+        min={min}
+        max={25}
+        onChange={changeFunc} 
         defaultValue={5} 
         aria-label="Default" 
-        valueLabelDisplay="auto" 
+        valueLabelDisplay="auto"
       />
     </Box>
   );

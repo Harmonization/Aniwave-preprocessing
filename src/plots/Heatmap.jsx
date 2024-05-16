@@ -1,14 +1,14 @@
 
 import Plot from 'react-plotly.js'
 
-export default function Heatmap({z, clickFunc, width=700, height=500, color='Earth', shapes=[]}) {
+export default function Heatmap({z, clickFunc, width=600, height=500, color='Earth', type, shapes=[]}) {
     return (
       <div className="heatmap-item">
         <Plot 
           data={[
             {
-              z: z,
-              type: 'heatmap',
+              z,
+              type,
               colorscale: color
             }
           ]} 
@@ -25,7 +25,7 @@ export default function Heatmap({z, clickFunc, width=700, height=500, color='Ear
             shapes: shapes,
             width: width, 
             height: height,
-            margin: {t: 0, b: 30, l: 0, r: 0},
+            margin: {t: 0, b: 0, l: 0, r: 0},
             template: "plotly_white",
             x: 0.11,
             xanchor: "left",
@@ -33,23 +33,7 @@ export default function Heatmap({z, clickFunc, width=700, height=500, color='Ear
             yanchor: "top",
             showactive: true,
             paper_bgcolor: 'rgba(119, 204, 247, .01)',
-            updatemenus: [
-            {
-              type: 'buttons',
-              direction: 'top',
-              buttons: [
-                {
-                  args: ['type', 'heatmap'],
-                  label: 'Heatmap',
-                  method: 'restyle'
-                },
-                {
-                  args: ['type', 'surface'],
-                  label: '3D Surface',
-                  method: 'restyle'
-                }
-              ]
-          }]}}
+            }}
         />
       </div>
     )

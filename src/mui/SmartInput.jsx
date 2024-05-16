@@ -2,10 +2,11 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-export default function SmartInput({ pressChannel, dopFunc, defaultValue='', story = [], title='Умная строка' }) {
+export default function SmartInput({ pressChannel, dopFunc, defaultValue='', value=null, story = [], title='Умная строка' }) {
   return (
     <Autocomplete
-      defaultValue={defaultValue}
+      value={value || defaultValue}
+      // defaultValue={defaultValue}
       onKeyDown={pressChannel}
       onBlur={e => dopFunc(e.target.value)}
       freeSolo

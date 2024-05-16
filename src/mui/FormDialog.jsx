@@ -21,7 +21,7 @@ export default function FormDialog({submitFunc}) {
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen}>
-        Скормить результат диску
+        Сохранить все ROI
       </Button>
       <Dialog
         open={open}
