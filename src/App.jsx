@@ -53,17 +53,17 @@ function App() {
 
   const [sign, setSign] = useState({
     spectres: [],
-    filter: 'golay',
-    h: 5
+    filter: settings.filter,
+    h: settings.h
   })
 
   const [hmap, setHmap] = useState({
-    expression: settings.index_story[0],
+    expression: settings.channel,
     index_story: settings.index_story,
     channel: null, 
     colormap: settings.colormap, 
-    min_thr: -1, 
-    max_thr: 1, 
+    min_thr: settings.t1, 
+    max_thr: settings.t2, 
     min_lim: -1, 
     max_lim: 1, 
     type: 'heatmap'
@@ -234,6 +234,7 @@ function App() {
         'Content-Type': 'application/json;charset=utf-8'
       },
       body: JSON.stringify({
+        channel: hmap.expression,
         index_story: hmap.index_story,
         rois_story: roi.map(el => el.roi_str), // Двумерный массив
         colormap: hmap.colormap,
@@ -251,9 +252,9 @@ function App() {
   return (
     <div className="page">
 
-      <Button onClick={saveSettings}>Сохранить настройки</Button>
-
       <InputFileUpload clickFunc={openHSI}/>
+
+      {hmap.channel && <Button onClick={saveSettings}>Сохранить настройки</Button>}
 
       {hmap.channel && <div className="workflow">
 
@@ -268,7 +269,7 @@ function App() {
           <div className="switch-plot-type">
             <ColorSwitch handleChange={e => setHmap({...hmap, type: ['surface', 'heatmap'][Number(e.target.checked)]})}/>
           </div>
-          <Track value={[hmap.min_thr, hmap.max_thr]} handleChange={(e, newValue)=> setHmap({...hmap, min_thr: newValue[0], max_thr: newValue[1]})} min={hmap.min_lim} max={hmap.channel.max_lim}/>
+          <Track value={[hmap.min_thr, hmap.max_thr]} handleChange={(e, newValue)=> setHmap({...hmap, min_thr: newValue[0], max_thr: newValue[1]})} min={hmap.min_lim} max={hmap.max_lim}/>
           <NumberSlider min={3} changeFunc={e => setSign({...sign, h: e.target.value})} value={sign.h}/>
 
         </Stack>
