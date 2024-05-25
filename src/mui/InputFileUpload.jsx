@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import { styled } from '@mui/material/styles';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
@@ -33,23 +32,3 @@ const VisuallyHiddenInput = styled('input')({
       </Button>
     );
   }
-
-// export default function MenuButtons({clickFuncs=[]}) {
-    
-//   return (
-//     <Stack direction="row" spacing={2}>
-//       <InputFileUpload clickFunc={clickFuncs && clickFuncs[0]}/>
-
-//       <Button color="secondary">Secondary</Button>
-
-//       <Button variant="contained" color="success">
-//         Success
-//       </Button>
-
-//       <Button variant="outlined" color="error">
-//         Error
-//       </Button>
-
-//     </Stack>
-//   );
-// }

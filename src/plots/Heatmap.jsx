@@ -9,18 +9,21 @@ export default function Heatmap({z, clickFunc, width=600, height=500, color='Ear
             {
               z,
               type,
-              colorscale: color
+              colorscale: color,
+              zsmooth: 'fast'
             }
           ]} 
           onClick={async e => clickFunc(e)}
           layout={{
             xaxis: {
               ticks: '',
-              showticklabels: false
+              showticklabels: false,
+              showgrid: false
             },
             yaxis: {
               ticks: '',
-              showticklabels: false
+              showticklabels: false,
+              showgrid: false
             },
             shapes: shapes,
             width: width, 
@@ -33,6 +36,7 @@ export default function Heatmap({z, clickFunc, width=600, height=500, color='Ear
             yanchor: "top",
             showactive: true,
             paper_bgcolor: 'rgba(119, 204, 247, .01)',
+            plot_bgcolor: 'rgba(119, 204, 247, .01)',
             }}
         />
       </div>

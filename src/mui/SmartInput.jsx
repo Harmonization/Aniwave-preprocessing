@@ -2,15 +2,14 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 
-export default function SmartInput({ pressChannel, dopFunc, defaultValue='', value=null, story = [], title='Умная строка' }) {
+export default function SmartInput({ pressChannel, defaultValue='', value=null, story = [], title='Умная строка', id='free-solo-2-demo'}) {
   return (
     <Autocomplete
       value={value || defaultValue}
-      // defaultValue={defaultValue}
       onKeyDown={pressChannel}
-      onBlur={e => dopFunc(e.target.value)}
+      onBlur={pressChannel}
       freeSolo
-      id="free-solo-2-demo"
+      id={id}
       disableClearable
       options={story}
       style={{ width: 500, margin: 15 }}

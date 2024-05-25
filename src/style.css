@@ -28,7 +28,7 @@ body::-webkit-scrollbar-thumb {
     box-shadow: 3px 3px 5px black;
     min-width: 350px;
     min-height: 94vh;
-    background-image: url('../static/cloud.jpg');
+    background-image: url('../static/cloud2.jpg');
     background-size: cover;
     /* color: coral; */
 }
@@ -101,3 +101,7 @@ input {
     display: grid;
     align-items: center;
 }
+
+.subplot.xy .heatmaplayer image {
+    image-rendering: pixelated;  
+  }

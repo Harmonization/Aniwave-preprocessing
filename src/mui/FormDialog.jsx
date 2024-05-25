@@ -20,7 +20,7 @@ export default function FormDialog({submitFunc}) {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={{mt:3, width: '100%', bgcolor: 'aqua', color: 'white'}}>
         Сохранить все ROI
       </Button>
       <Dialog

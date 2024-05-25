@@ -5,13 +5,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function SelectStatic({menuItems, value, handleChange, title='Статистика', nullElem=false}) {
-  // const [value, setValue] = React.useState('')
-
-  // const handleChange = e => {
-  //   if (!currentValue) setValue(e.target.value)
-  //   if (changeFunc) changeFunc(e.target.value)
-  // }
-
   return (
     <div>
       <FormControl sx={{ m: 1, minWidth: 140 }} style={{ margin: 15 }}>
@@ -26,7 +19,7 @@ export default function SelectStatic({menuItems, value, handleChange, title='С�
           
         >
           {nullElem && <MenuItem value="">
-            <em>None</em>
+            <em>Ничего</em>
           </MenuItem>}
           
           {Object.keys(menuItems).map((key, indx) => <MenuItem value={key} key={`select-item-${indx}`}>{menuItems[key]}</MenuItem>)}

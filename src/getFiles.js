@@ -211,11 +211,7 @@ export const getFiles = async () => {
     // Загрузка настроек
     const request = `http://localhost:8000/settings`
     const response = await fetch(request)
-    const {rois : settings, parameters, input_story: inputStory} = await response.json()
-    console.log(settings, parameters, inputStory)
-    
-    // Загрузка текста описания разделов
-    // const response_text = await fetch('./static/text.json')
-    // const text = await response_text.json()
-    return {nm, settings, parameters, inputStory}
+    const settings = await response.json()
+
+    return {nm, settings}
 }

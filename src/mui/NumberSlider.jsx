@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { Typography } from '@mui/material';
 
-export default function SliderSizes({min, changeFunc}) {
+export default function SliderSizes({min, changeFunc, value=5}) {
   return (
     <Box sx={{ width: 400 }}>
       <Typography textAlign='center' id="input-slider" gutterBottom><strong>Длина окна фильтрации</strong></Typography>
@@ -11,8 +11,8 @@ export default function SliderSizes({min, changeFunc}) {
         color="secondary"
         min={min}
         max={25}
-        onChange={changeFunc} 
-        defaultValue={5} 
+        onChange={changeFunc}
+        value={value}
         aria-label="Default" 
         valueLabelDisplay="auto"
       />
